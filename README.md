@@ -11,6 +11,8 @@
 - Firebase setup
 - deployed production app
 - create new users in firebase
+- created redux store using userSlice
+- 
 
 # FEATURES
 

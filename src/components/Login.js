@@ -2,14 +2,20 @@ import React, { useRef, useState } from 'react'
 import Header from "./Header";
 import { Validate } from "../untils/Validate";
 import { auth } from "../untils/firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { addUser } from "../untils/userSlice";
+import { useDispatch } from 'react-redux';
 
 
 const Login = () => {
 
     const [errorMsg, setErrorMsg] = useState();
     const [signInToggle, setSignInToggle] = useState(true);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const name = useRef(null);
     const email = useRef(null);
     const Password = useRef(null);
 
@@ -24,7 +30,21 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    console.log(user);
+                    updateProfile(user, {
+                        displayName: name.current.value, photoURL: "https://instagram.fvga2-2.fna.fbcdn.net/v/t51.2885-19/413951314_398407565957366_8770730937078491380_n.jpg?_nc_ht=instagram.fvga2-2.fna.fbcdn.net&_nc_cat=102&_nc_ohc=OaTdYUcYyckQ7kNvgGKNsci&edm=AEhyXUkBAAAA&ccb=7-5&oh=00_AYANUIjVpDOIgoQQktRz8diXdcn4_IAumIAoBsSbUfdlgw&oe=66D61135&_nc_sid=8f1549"
+                    }).then(() => {
+                        // Profile updated!
+                        const { uid, email, displayName, photoURL } = auth.currentUser;
+                        dispatch(
+                            addUser(
+                                { uid: uid, email: email, displayName: displayName, photoURL: photoURL }
+                            ));
+
+                        navigate("/browser");
+                    }).catch((error) => {
+                        // An error occurred
+                        setErrorMsg(error);
+                    });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -38,6 +58,7 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user);
+                    navigate("/browser");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -68,7 +89,7 @@ const Login = () => {
 
             <form onSubmit={(e) => e.preventDefault()} className='absolute w-[30%] h-[87.1%] p-[65px] bg-black   flex flex-col text-white m-auto left-0 right-0 my-[100px] bg-opacity-70'>
                 <h1 className='text-3xl'>Sign {signInToggle ? "In" : "up"}</h1>
-                {signInToggle ? "" : <input type='text' className='rounded-lg mt-4 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Full Name' />}
+                {signInToggle ? "" : <input type='text' ref={name} className='rounded-lg mt-4 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Full Name' />}
                 <input type='text' ref={email} className='rounded-lg mt-6 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Email or Mobile number' />
                 <input type='password' ref={Password} className='rounded-lg mt-4 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Password' />
                 <p className='text-red-600'>{errorMsg}</p>
@@ -78,7 +99,7 @@ const Login = () => {
                 <span className='mt-3 text-center hover:underline'>{signInToggle ? "Forgot Password?" : ""}</span>
 
                 <span className='mt-3 '><input type="checkbox" className="accent-slate-500" />
-                    <label class="  cursor-pointer ml-5" htmlFor="check">
+                    <label className="  cursor-pointer ml-5" htmlFor="check">
                         Remember Me
                     </label></span>
                 {signInToggle ? <span className='mt-5'><span className='text-zinc-400'>New to Netflix?</span><span className='hover:underline' onClick={toggleSignIn}> Sign up now.</span></span>
