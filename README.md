@@ -22,7 +22,12 @@
 - get data from TMDB from movies list api
 - updated store with tailwind css data
 - embedded a youtube video and make it autoplay and mute
-- 
+- build secondary component
+- build movie list
+- build movie card
+- found out img_cdn url
+- created custom hooks
+- usePopularMovies,useTopRatedMovies,useTrending
 
 
 

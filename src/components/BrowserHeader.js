@@ -20,7 +20,7 @@ const BrowserHeader = () => {
     return (
         <div className=' ' >
             <Auth />
-            <div className='px-32 bg-black bg-gradient-to-b from-black  flex justify-between absolute'>
+            <div className='px-32 bg-black fixed from-black  flex justify-between '>
                 <img className='w-[14%]'
                     src={netflixLogo}
                     alt='LOGO'
