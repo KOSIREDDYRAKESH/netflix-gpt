@@ -3,16 +3,15 @@ import Header from "./Header";
 import { Validate } from "../untils/Validate";
 import { auth } from "../untils/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
 import { addUser } from "../untils/userSlice";
 import { useDispatch } from 'react-redux';
+import { defaultAvatar, netflixBgImg } from '../untils/constants';
 
 
 const Login = () => {
 
     const [errorMsg, setErrorMsg] = useState();
     const [signInToggle, setSignInToggle] = useState(true);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const name = useRef(null);
@@ -31,7 +30,7 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: name.current.value, photoURL: "https://instagram.fvga2-2.fna.fbcdn.net/v/t51.2885-19/413951314_398407565957366_8770730937078491380_n.jpg?_nc_ht=instagram.fvga2-2.fna.fbcdn.net&_nc_cat=102&_nc_ohc=OaTdYUcYyckQ7kNvgGKNsci&edm=AEhyXUkBAAAA&ccb=7-5&oh=00_AYANUIjVpDOIgoQQktRz8diXdcn4_IAumIAoBsSbUfdlgw&oe=66D61135&_nc_sid=8f1549"
+                        displayName: name.current.value, photoURL: defaultAvatar
                     }).then(() => {
                         // Profile updated!
                         const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -39,8 +38,6 @@ const Login = () => {
                             addUser(
                                 { uid: uid, email: email, displayName: displayName, photoURL: photoURL }
                             ));
-
-                        navigate("/browser");
                     }).catch((error) => {
                         // An error occurred
                         setErrorMsg(error);
@@ -57,8 +54,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user);
-                    navigate("/browser");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -80,8 +75,8 @@ const Login = () => {
 
 
                 <div className=' bg-black h-screen w-screen'>
-                    <img className='h-screen bg-blend-lighten hover:bg-blend-darken opacity-50'
-                        src='https://assets.nflxext.com/ffe/siteui/vlv3/36a4db5b-dec2-458a-a1c0-662fa60e7473/1115a02b-3062-4dcc-aae0-94028a0dcdff/IN-en-20240820-TRIFECTA-perspective_WEB_eeff8a6e-0384-4791-a703-31368aeac39f_large.jpg'
+                    <img className='h-screen w-screen bg-blend-lighten hover:bg-blend-darken opacity-50'
+                        src={netflixBgImg}
                         alt='BG-img'
                     />
                 </div>

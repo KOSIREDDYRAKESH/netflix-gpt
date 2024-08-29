@@ -12,7 +12,19 @@
 - deployed production app
 - create new users in firebase
 - created redux store using userSlice
+- implemented singout
+- updated profile api call
+- navigated to browser after authentication
+- bug fix - if the user is not login redirect to /browser page vice versa
+- unsubscribed to the onAuthStateChange callback
+- added hardcoded values to constants file
+- regitered in TMDB and get access token
+- get data from TMDB from movies list api
+- updated store with tailwind css data
+- embedded a youtube video and make it autoplay and mute
 - 
+
+
 
 # FEATURES
 
