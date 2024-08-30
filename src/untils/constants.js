@@ -13,3 +13,10 @@ export const API_GET = {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTZlODIyYWIyMDEwMDMwZTdlNmJjNzYxM2VlMTY3OSIsIm5iZiI6MTcyNDkyOTI1OC4xMTYzNjMsInN1YiI6IjY2ZDA1MWYzYTkyNTU1N2EzZTMxOTk0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Hw63-m13lo7dDFSMOYKazoxqeuhQZu2UFJiteIn9FRA'
     }
 };
+
+export const supportedLanguages =
+    [
+        { identifier: "English", name: "English" },
+        { identifier: "Hindi", name: "Hindi" },
+        { identifier: "Telugu", name: "Telugu" }
+    ]

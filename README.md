@@ -28,6 +28,10 @@
 - found out img_cdn url
 - created custom hooks
 - usePopularMovies,useTopRatedMovies,useTrending
+- created GPT page
+- created GPT search bar
+- created multi-language (Feature)
+
 
 
 

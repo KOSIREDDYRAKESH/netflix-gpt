@@ -85,7 +85,7 @@ const Login = () => {
             <form onSubmit={(e) => e.preventDefault()} className='absolute w-[30%] h-[87.1%] p-[65px] bg-black   flex flex-col text-white m-auto left-0 right-0 my-[100px] bg-opacity-70'>
                 <h1 className='text-3xl'>Sign {signInToggle ? "In" : "up"}</h1>
                 {signInToggle ? "" : <input type='text' ref={name} className='rounded-lg mt-4 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Full Name' />}
-                <input type='text' ref={email} className='rounded-lg mt-6 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Email or Mobile number' />
+                <input type='text' ref={email} className='rounded-lg mt-6 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Email ' />
                 <input type='password' ref={Password} className='rounded-lg mt-4 p-4 h-[50px] bg-transparent border border-gray-500' placeholder='Password' />
                 <p className='text-red-600'>{errorMsg}</p>
                 <button className='bg-red-600 mt-5 text-white h-[40px] rounded-md' onClick={handleValidation}>Sign {signInToggle ? "In" : "up"}</button>
